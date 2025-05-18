@@ -13,7 +13,7 @@ This is a REST-assured API automation framework built using **Java**, **RestAssu
 **Steps to Project Execution**
 -----------**On Local**:------------------
 1. **Clone the code from the github respository on your Local machine**
-   - git clone --branch feature/cbatest https://github.com/<githubuser>/cbatest.git
+   - git clone --branch feature/cbatest https://github.com/git_user_name/cbatest.git
    - cd cbatest
 
 2. **Set up System Pre requisites**:
