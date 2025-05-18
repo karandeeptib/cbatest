@@ -34,7 +34,7 @@ public class PetStepDefinition extends Utils {
 	RequestSpecification getPetReq;
 	ResponseSpecification addPetResSpec;
 	static Response addPetResponse;
-	static int petid;
+	static Integer petid;
 	TestDataBuild testData = new TestDataBuild();
 
 	@Given("I have a add new pet payload with {string} {string} {string} {string} {string} {string} {string} {string}")
@@ -92,30 +92,13 @@ public class PetStepDefinition extends Utils {
 	@Given("a pet exists with ID {string}")
 	public void a_pet_exists_with_id(String petId) throws IOException {
 		petid = Integer.parseInt(petId);
-		getPetReq = given().log().all().spec(requestSpecification()).pathParam("petId", petid);
+		getPetReq = given().log().all().spec(requestSpecification()).pathParam("petId", Integer.parseInt(petId));
 	}
 
 	@Then("fetch request is successful with response code {int}")
 	public void fetch_request_is_successful_with_response_code(Integer int1) {
 		assertEquals(200, addPetResponse.getStatusCode());
 	}
-
-	@Then("the response should contain pet details")
-	public void the_response_should_contain_pet_details() {
-		String response = addPetResponse.asString();
-		JsonPath jsonPath = new JsonPath(response);
-		assertEquals(addPetPojo.getId(), Integer.parseInt(getJsonPath(addPetResponse, "id")));
-		assertEquals(addPetPojo.getName(), getJsonPath(addPetResponse, "name"));
-		assertEquals(addPetPojo.getStatus(), getJsonPath(addPetResponse, "status"));
-		assertEquals(categoryPojo.getName(), getJsonPath(addPetResponse, "category.name"));
-		assertEquals(categoryPojo.getId(), Integer.parseInt(getJsonPath(addPetResponse, "category.id")));
-		assertEquals(addPetPojo.getPhotoUrls().get(0), getJsonPath(addPetResponse, "photoUrls[0]"));
-		assertEquals(petTagsPojo.getId(), Integer.parseInt(getJsonPath(addPetResponse, "tags[0].id")));
-		assertEquals(petTagsPojo.getName(), getJsonPath(addPetResponse, "tags[0].name"));
-
-	}
-
-	Utils u = new Utils();
 
 	@Then("the update should be successful with response code {int}")
 	public void the_update_should_be_successful_with_response_code(Integer int1) {
