@@ -1,5 +1,6 @@
 package apiResources;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +23,11 @@ public class Utils {
 	public RequestSpecification requestSpecification() throws IOException {
 
 		if (addPetBaseReq == null) {
+			
+			File logDir = new File("target/logs");
+			if (!logDir.exists()) {
+			    logDir.mkdirs();  
+			}
 			PrintStream log = new PrintStream(new FileOutputStream("target/logs/logging.txt"));
 			addPetBaseReq = new RequestSpecBuilder().setBaseUri(getGlobalValue("baseURL"))
 					.addFilter(RequestLoggingFilter.logRequestTo(log))

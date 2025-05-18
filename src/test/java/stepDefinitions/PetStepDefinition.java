@@ -40,14 +40,14 @@ public class PetStepDefinition extends Utils {
 	@Given("I have a add new pet payload with {string} {string} {string} {string} {string} {string} {string} {string}")
 	public void i_have_a_add_new_pet_payload_with(String petId, String name, String status, String photoURL,
 			String tagId, String tagName, String categoryId, String categoryName) throws IOException {
-		addPetRequest = given().spec(requestSpecification()).body(
+		addPetRequest = given().log().all().spec(requestSpecification()).body(
 				testData.addNewPetPayload(petId, name, status, photoURL, tagId, tagName, categoryId, categoryName));
 	}
 
 	@Given("I have a update pet Payload with {string} {string} {string} {string} {string} {string} {string} {string}")
 	public void i_have_a_update_pet_payload_with(String petId, String name, String status, String photoURL,
 			String tagId, String tagName, String categoryId, String categoryName) throws IOException {
-		addPetRequest = given().spec(requestSpecification()).body(
+		addPetRequest = given().log().all().spec(requestSpecification()).body(
 				testData.addNewPetPayload(petId, name, status, photoURL, tagId, tagName, categoryId, categoryName));
 	}
 
@@ -92,7 +92,7 @@ public class PetStepDefinition extends Utils {
 	@Given("a pet exists with ID {string}")
 	public void a_pet_exists_with_id(String petId) throws IOException {
 		petid = Integer.parseInt(petId);
-		getPetReq = given().spec(requestSpecification()).pathParam("petId", petid);
+		getPetReq = given().log().all().spec(requestSpecification()).pathParam("petId", petid);
 	}
 
 	@Then("fetch request is successful with response code {int}")
